@@ -1,4 +1,4 @@
-# SERVER-API
+# SERVER-API-EMPTY
 
 [![Travis](https://img.shields.io/travis/com/justalk/server-api.svg?style=flat-square)](https://travis-ci.com/github/JustalK/server-api)
 [![Coverage Status](https://coveralls.io/repos/github/JustalK/SERVER-API/badge.svg?branch=master)](https://coveralls.io/github/JustalK/SERVER-API?branch=master)

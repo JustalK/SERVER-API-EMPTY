@@ -116,15 +116,7 @@ module.exports = {
     return new ApolloServer({
       schema,
       introspection: true,
-      playground: true,
-      context: ({ req }) => {
-        // get the authorization from the request headers
-        // return a context obj with our token. if any!
-        const auth = req.headers.authorization || ''
-        return {
-          auth
-        }
-      }
+      playground: true
     })
   },
   /**

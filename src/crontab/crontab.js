@@ -1,7 +1,7 @@
-const cron_recover_token = require('@src/crontab/cron/recover_token')
+const cron_test = require('@src/crontab/cron/cron_test')
 
 module.exports = {
   start: () => {
-    cron_recover_token.invalid_outdated_token()
+    cron_test.cron_test()
   }
 }
