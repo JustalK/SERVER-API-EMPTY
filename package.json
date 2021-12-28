@@ -12,7 +12,9 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "check-update": "npm outdated --depth=0",
     "linter": "eslint --fix './src/**/*.js'",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "encode": "npx secure-env env/.env.development -s mySecretPassword -o .env.enc",
+    "decode": "npx secure-env env/.env.development.enc -d -o env.out -s mySecretPassword"
   },
   "engines": {
     "node": ">=15.0"
@@ -74,7 +76,8 @@
     "jsdoc": "^3.6.6",
     "mongo-seeding": "^3.5.0",
     "npx": "^10.2.2",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "secure-env": "^1.2.0"
   },
   "ava": {
     "files": [
