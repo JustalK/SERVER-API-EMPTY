@@ -15,6 +15,8 @@ The continuous integration is handled with `Travis` and the coverage is checked 
 
 Before committing, `Husky` will force the tests to be run and will validate or not the new push.
 
+I also added `dotenv-encode` for encoding or decoding the env files.
+
 ## Plan of the presentation
 
 I explain with all the details how I build the project and my way of working.
@@ -140,44 +142,18 @@ A html doc will be then found inside the directory **/doc/schema**.
 * **mongo-seeding**: The ultimate solution for populating your MongoDB database. I use it for populating the test database and also for populating the server at first installation.
 * **npx**: Executes <command> either from a local node_modules/.bin, or from a central cache, installing any packages needed in order for <command> to run. I use it for running package from my local node module directory such as esLint.
 * **nyc**: Istanbul's state of the art command line interface. I use it for creating the report for the coverall and making it available in the browser.
-
+* **dotenv-encode**: My own package for encoding or decoding the env file
 
 #### Environment variables
 
-The environment variable are not present in the project but can be found in the `travis.yaml`. Most of them are visible but some are encrypted for Travis to perform his tests.
+The environment variables are encoded in the `env` folder with a pass.<br />
+*Hint: What is the name of my first cat ?*
 
-For encrypting the variables, you will need Travis :
-
-```
-gem install travis
-```
-
-Then you will need to connect your GitHub account to it. I recommend using GitHub-token.
-
-```
-travis login --github-token my_token
-```
-
-Where **my_token** is the token you will have generated in `https://github.com/settings/tokens`
-
-For encrypting a value, you just need to use the following command :
-
-```
-travis encrypt KEY="value"
-```
-
-or for an entire file :
-
-```
-travis encrypt-file ./xxx_filename --add
-```
-
-#### Build email
-
-The email are build with `heml` and `Mustache`. They can be build easily with the following command :
-
-```
-npm run build:emails
+```bash
+# For encoding the development env file
+$ npm run encode
+# For decoding the development env file
+$ npm run decode
 ```
 
 #### Adding new request
@@ -189,7 +165,7 @@ The mutations, directives and queries are dynamically added to the graph. For ad
 - Add the new request into the directives, mutations or queries types inside the folder **types**.
 - Depedning of your need you might need to create a file inside the **dbs** folder.
 
-#### Pre-commit
+#### Pre-push
 
 `Husky` has been installed and will prevent to push any code that break the project.
 
@@ -197,25 +173,16 @@ The mutations, directives and queries are dynamically added to the graph. For ad
 
 For having a database with some data from the start, you can seed it with a single command. It will fill up all the db with dummy data using `mongo-seed`.
 
-```
-npm run seed
+```bash
+$ npm run seed
 ```
 
 ## Testing
 
 For automatic tests, I use `Ava`. All the tests can be run with a single command. The command will also provide details on the coverage.
 
-```
-npm run test
-```
-
-#### SSH Tunneling
-
-For connecting to the API during the development, I use `localtunnel` for exposing the server through a domain format. The server works on the port 5000, so I use the following commands :
-
-```
-npm install -g localtunnel
-lt --port 5000 --subdomain couple-api
+```bash
+$ npm run test
 ```
 
 ## Admin
@@ -246,13 +213,9 @@ http://localhost:5000/status
 
 For running the API, a single command is needed. You might want to use the [SSH Tunneling](#ssh-tunneling).
 
+```bash
+$ npm run start
 ```
-npm run start
-```
-
-## Deployment
-
-The continuous deployment is made with `Travis` with the informations inside the `.travis.yml`. The SSH key for accessing the server from `Travis` has been encoded and is passed to travis with the file `deploy_key.enc`. The env variable *key* and *iv* needed for decrypting the file has been added to the setting of travis.
 
 ## License
 

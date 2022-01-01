@@ -13,8 +13,8 @@
     "check-update": "npm outdated --depth=0",
     "linter": "eslint --fix './src/**/*.js'",
     "postinstall": "husky install",
-    "encode": "npx dotenv-encode env/.env.development -o env/.env.development.enc -s mySecretPassword",
-    "decode": "npx dotenv-encode env/.env.development.enc -d -o env/.env.development -s mySecretPassword"
+    "encode": "npx dotenv-encode env/.env.development -o env/.env.development.enc",
+    "decode": "npx dotenv-encode env/.env.development.enc -d -o env/.env.development"
   },
   "engines": {
     "node": ">=15.0"
