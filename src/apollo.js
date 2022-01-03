@@ -12,12 +12,14 @@ const fs = require('fs')
 module.exports = {
   /**
   * Get all the types definition from the types directory
+  * @param {string} path The path of the types to add
   * @return {gql} Return the one gql schema
   **/
-  get_types: () => {
-    const types = fs.readdirSync('src/types')
+  get_types: (path) => {
+    const types = fs.readdirSync(`src/${path}`)
+    // Get the definition
     const typeDefs = types.map(type => {
-      return require('./types/' + type.split('.')[0])
+      return require(`./${path}/${type.split('.')[0]}`)
     })
     return typeDefs
   },
@@ -93,12 +95,20 @@ module.exports = {
   * @return {Object} Return the excutable schema for apollo
   **/
   create_schema: () => {
-    const typeDefs = module.exports.get_types()
+    const typeDefinitions = module.exports.get_types('types/definitions')
+    const typeDirectives = module.exports.get_types('types/directives')
+    const typeMutations = module.exports.get_types('types/mutations')
+    const typeQueries = module.exports.get_types('types/queries')
     const resolvers = module.exports.get_resolvers()
     const directives = module.exports.get_directives()
 
     const schema = makeExecutableSchema({
-      typeDefs,
+      typeDefs: [
+        ...typeDefinitions,
+        ...typeDirectives,
+        ...typeMutations,
+        ...typeQueries
+      ],
       resolvers,
       schemaDirectives: directives,
       resolverValidationOptions: {

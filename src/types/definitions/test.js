@@ -31,5 +31,9 @@ module.exports = gql`
     A random boolean
     """
     value_boolean: Boolean!
+    """
+    A random boolean
+    """
+    test: Test!
   }
 `

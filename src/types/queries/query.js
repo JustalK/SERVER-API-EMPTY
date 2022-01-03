@@ -8,8 +8,8 @@ module.exports = gql`
   """
   type Query  {
     """
-    Return the test
+    Test the status of the API
     """
-    get_tests: [Test]! @isTest
+    _: Boolean
   }
 `

@@ -23,5 +23,12 @@ module.exports = {
   **/
   insert: (test) => {
     return model.create(test)
+  },
+  /**
+  * Call mongodb for getting one document by id in the collection
+  * @return {Test} The test id or null
+  **/
+  get_by_id: (_id) => {
+    return model.find({ _id })
   }
 }
