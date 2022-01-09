@@ -13,8 +13,8 @@
     "check-update": "npm outdated --depth=0",
     "linter": "eslint --fix './src/**/*.js'",
     "postinstall": "husky install",
-    "encode": "npx dotenv-encode env/.env.development -o env/.env.development.enc && npx dotenv-encode env/.env.test -o env/.env.test.enc",
-    "decode": "npx dotenv-encode env/.env.development.enc -d -o env/.env.development && npx dotenv-encode env/.env.test.enc -d -o env/.env.test"
+    "encode": "npx dotenv-encode ./env -o ./env_encrypted",
+    "decode": "npx dotenv-encode ./env_encrypted -d -o ./env"
   },
   "engines": {
     "node": ">=15.0"
@@ -65,7 +65,7 @@
   "devDependencies": {
     "ava": "^3.14.0",
     "coveralls": "^3.1.0",
-    "dotenv-encode": "^1.0.2",
+    "dotenv-encode": "^1.0.5",
     "eslint": "^7.19.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
